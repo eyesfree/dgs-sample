@@ -1,0 +1,40 @@
+type Query {
+    projects(nameFilter: String): [TasksProject]
+    tasks(id: String): [Task]
+}
+
+type Mutation {
+    update(project: TasksProjectInput): String
+}
+scalar Date
+
+type Task {
+    id: ID!
+    isSubTask: Boolean!
+    projectId: String
+    name: String
+    description: String
+    status: Status
+    assigneeName: String
+    priority: Int
+    dueDate: Date
+    createdDate: Date
+    subTasks: [String!]
+}
+
+type TasksProject {
+    id: String
+    name: String
+}
+
+input TasksProjectInput {
+    id: String
+    name: String
+}
+
+enum Status {
+    NEW
+    IN_PROGRESS
+    DONE
+    ON_HOLD
+}
